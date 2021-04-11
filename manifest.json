@@ -1,0 +1,24 @@
+{
+    "name": "VIVO URL Grabber",
+    "version": "2021.04.11",
+    "description": "Find Video Links",
+    "author": "Lukas Bonrath",
+    "manifest_version": 2,
+    "content_scripts": [
+        {
+            "matches": ["<all_urls>"],
+            "js": ["content.js"]
+        }
+    ],
+    "browser_action": {
+        "default_popup": "popup.html"
+    },
+    "background": {
+        "scripts": ["background.js"],
+        "persistent": false
+    },
+    "permissions": [
+        "activeTab",
+        "storage"
+    ]
+}
