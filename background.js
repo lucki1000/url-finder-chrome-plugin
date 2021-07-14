@@ -22,7 +22,7 @@ function DOMtoString(document_root) {
         }
         node = node.nextSibling;
     }
-    let str = new RegExp("(http|https):\\/\\/vivo.sx\\/..........", "g");
+    let str = new RegExp("(http|https):\\/\\/vivo.sx\\/..........", "g"); //Replace this link with your RegEx
     let result = html.match(str);
     return result;
 }
