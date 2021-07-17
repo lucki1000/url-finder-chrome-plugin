@@ -24,6 +24,17 @@ function DOMtoString(document_root) {
     }
     let str = new RegExp("(http|https):\\/\\/vivo.sx\\/..........", "g"); //Replace this link with your RegEx
     let result = html.match(str); //test
+    if (localStorage.getItem("save_to_storage") === null){
+        localStorage.setItem("save_to_storage", result);
+    } else{
+        function appendToStorage(name, data){
+            var old = localStorage.getItem(name);
+            if (old === null) old = "";
+            localStorage.setItem(name, old + data);
+        }
+        appendToStorage('save_to_storage', result)
+    }
+    result = localStorage.getItem('save_to_storage');
     return result;
 }
 

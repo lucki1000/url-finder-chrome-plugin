@@ -1,18 +1,6 @@
 chrome.runtime.onMessage.addListener(function(request, sender) {
     if (request.action == "getSource") {
         message.innerText = request.source;
-        if (localStorage.getItem("save_to_storage") === null) {
-            storage.setItem("save_to_storage", message.innerText);
-        } else {
-            function appendToStorage(name, data) {
-                var old = localStorage.getItem(name);
-                if (old === null) old = "";
-                localStorage.setItem(name, old + data);
-            }
-
-            appendToStorage('save_to_storage', message.innerText);
-        }
-        message.innerText = storage.getItem(save_to_storage);
     }
 });
 
