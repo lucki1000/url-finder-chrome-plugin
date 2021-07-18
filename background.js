@@ -24,21 +24,25 @@ function DOMtoString(document_root) {
     }
     let str = new RegExp("(http|https):\\/\\/vivo.sx\\/..........", "g"); //Replace this link with your RegEx
     let result = html.match(str); //test
-    if (localStorage.getItem("save_to_storage") === null){
-        localStorage.setItem("save_to_storage", result);
+    if (localStorage.getItem('save_to_storage') === null){
+        localStorage.setItem('save_to_storage', JSON.stringify(result));
     } else{
-        function appendToStorage(name, data){
-            var old = localStorage.getItem(name);
-            if (old === null) old = "";
-            localStorage.setItem(name, old + data);
+        function appendToStorage(name, data) {
+            var old = JSON.parse(localStorage.getItem(name)||[]);
+            localStorage.setItem(name, JSON.stringify(old.concat(data)));
         }
-        appendToStorage('save_to_storage', result)
+        appendToStorage('save_to_storage', result);
     }
-    result = localStorage.getItem('save_to_storage');
+    result = JSON.parse(localStorage.getItem('save_to_storage'));
     return result;
+
 }
 
 chrome.runtime.sendMessage({
     action: "getSource",
     source: DOMtoString(document)
 });
+
+function myFunction(){
+    localStorage.removeItem('save_to_storage');
+}
