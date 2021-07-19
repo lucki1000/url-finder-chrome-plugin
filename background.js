@@ -42,7 +42,3 @@ chrome.runtime.sendMessage({
     action: "getSource",
     source: DOMtoString(document)
 });
-
-function myFunction(){
-    localStorage.removeItem('save_to_storage');
-}

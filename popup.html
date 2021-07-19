@@ -9,5 +9,10 @@
     <body style="width:400px;">
       <div id='message'>Injecting Script....</div>
       <button onclick="myFunction()">Click me</button>
+      <script>
+        function myFunction(){
+          localStorage.removeItem('save_to_storage');
+        }
+      </script>
     </body>
 </html>
