@@ -1,3 +1,11 @@
+function myFunction(){
+    localStorage.removeItem('save_to_storage');
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    document.querySelector('button').addEventListener('click', myFunction);
+});
+
 function DOMtoString(document_root) {
     var html = '',
         node = document_root.firstChild;
@@ -22,8 +30,9 @@ function DOMtoString(document_root) {
         }
         node = node.nextSibling;
     }
-    let str = new RegExp("(http|https):\\/\\/vivo.sx\\/..........", "g"); //Replace this link with your RegEx
+    let str = new RegExp("(http|https):\\/\\/vivo...\\/..........", "g"); //Replace this link with your RegEx
     let result = html.match(str); //test
+    //let formatted_result;
     if (localStorage.getItem('save_to_storage') === null){
         localStorage.setItem('save_to_storage', JSON.stringify(result));
     } else{
@@ -34,8 +43,11 @@ function DOMtoString(document_root) {
         appendToStorage('save_to_storage', result);
     }
     result = JSON.parse(localStorage.getItem('save_to_storage'));
-    return result;
-
+    var uniq = result.reduce(function(a,b){
+        if (a.indexOf(b) < 0 ) a.push(b);
+        return a;
+    },[]);
+    return uniq.toString().split(',').join("\n");
 }
 
 chrome.runtime.sendMessage({
